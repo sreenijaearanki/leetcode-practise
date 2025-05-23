@@ -1,38 +1,41 @@
-public class Solution {
+import java.io.*;
+class Solution {
     public String tictactoe(int[][] moves) {
-        char[][] filled = new char[3][3];
+        int rows[] = new int[3];
+        int cols[] = new int[3];
+        int diag=0;
+        int anti=0;
 
-        // A = 'X', B = 'O'; A is odd B is even
-        for (int i = 0; i < moves.length; i++) {
-            int row = moves[i][0];
-            int col = moves[i][1];
+        int player=1; //A is 1; B is -1;
 
-            char player = (i % 2 == 0) ? 'X' : 'O';
-            filled[row][col] = player;
+        for(int[] m:moves)
+        {
+            int r=m[0];
+            int c=m[1];
 
-            if (checkWinner(filled, row, col, player)) 
-                return (player == 'X') ? "A" : "B";
+            rows[r]=rows[r]+player;
+            cols[c]=cols[c]+player;
+
+            if(r==c)
+            diag=diag+player;
+
+            if(r+c==2)
+            anti=anti+player;
+
+        if (Math.abs(rows[r])==3||Math.abs(cols[c])==3||Math.abs(diag)==3||Math.abs(anti)==3)
+        {
+            if(player==1)
+            return "A";
+            else
+            return "B";
         }
-        return (moves.length == 9) ? "Draw" : "Pending";
-    }
 
-    private boolean checkWinner(char[][] filled, int row, int col, char player) {
-        // Check row
-        if (filled[row][0] == player && filled[row][1] == player && filled[row][2] == player)
-            return true;
+        player=player*-1;
+        }
 
-        // Check column
-        if (filled[0][col] == player && filled[1][col] == player && filled[2][col] == player)
-            return true;
-
-        // Check main diagonal
-        if (row == col && filled[0][0] == player && filled[1][1] == player && filled[2][2] == player)
-            return true;
-
-        // Check anti-diagonal
-        if (row + col == 2 && filled[0][2] == player && filled[1][1] == player && filled[2][0] == player)
-            return true;
-
-        return false;
+        if(moves.length==9)
+        return "Draw";
+        else
+        return "Pending";
     }
 }

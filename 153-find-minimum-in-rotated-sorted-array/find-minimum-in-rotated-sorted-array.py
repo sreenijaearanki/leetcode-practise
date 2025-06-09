@@ -7,9 +7,9 @@ class Solution:
             #     low = mid + 1
             # else:
             #     high = mid
+            # the above aproach fails because when low=mid then we might actually miss the min because we are not checking equivalent
             if nums[mid] > nums[high]:
                 low = mid + 1
             else:
                 high = mid
-            # the above aproach fails because when low=mid then we might actually miss the min because we are not checking equivalent
         return nums[low]

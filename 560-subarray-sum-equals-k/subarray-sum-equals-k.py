@@ -1,14 +1,14 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        d={0:1}
-        res=0
-        presum=0
+        prefix=0
+        d=dict()
+        d[0]=1
+        ans=0
         for num in nums:
-            presum += num
-            if presum - k in d:
-                res+=d[presum - k]
-            if presum not in d:
-                d[presum]=1
-            else:
-                d[presum]+=1
-        return res
+            prefix+=num
+            target=prefix-k
+            if target in d:
+                ans+=d[target]
+            d[prefix] = d.get(prefix, 0) + 1
+
+        return ans

@@ -1,6 +1,6 @@
 class MyHashSet:
     def __init__(self):
-        self.n = 10000
+        self.n = 100000
         self.arr = [[] for _ in range(self.n)]
 
     def add(self, key: int) -> None:

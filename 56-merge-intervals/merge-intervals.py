@@ -1,7 +1,7 @@
 class Solution:
     def merge(self, intervals):
-        if not intervals:
-            return []
+        # if not intervals:
+        #     return []
 
         intervals.sort()  # ✅ Automatically sorts by start times
 
